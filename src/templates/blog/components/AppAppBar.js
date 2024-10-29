@@ -1,33 +1,34 @@
-import * as React from 'react';
-import { alpha, styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import Container from '@mui/material/Container';
-import Divider from '@mui/material/Divider';
-import MenuItem from '@mui/material/MenuItem';
-import Drawer from '@mui/material/Drawer';
-import MenuIcon from '@mui/icons-material/Menu';
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
-import Sitemark from './SitemarkIcon';
-import ColorModeIconDropdown from '../../shared-theme/ColorModeIconDropdown';
+import * as React from "react";
+import { Link } from "react-router-dom";
+import { alpha, styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import Container from "@mui/material/Container";
+import Divider from "@mui/material/Divider";
+import MenuItem from "@mui/material/MenuItem";
+import Drawer from "@mui/material/Drawer";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import Sitemark from "./SitemarkIcon";
+import ColorModeIconDropdown from "../../shared-theme/ColorModeIconDropdown";
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
   flexShrink: 0,
   borderRadius: `calc(${theme.shape.borderRadius}px + 8px)`,
-  backdropFilter: 'blur(24px)',
-  border: '1px solid',
+  backdropFilter: "blur(24px)",
+  border: "1px solid",
   borderColor: (theme.vars || theme).palette.divider,
   backgroundColor: theme.vars
     ? `rgba(${theme.vars.palette.background.defaultChannel} / 0.4)`
     : alpha(theme.palette.background.default, 0.4),
   boxShadow: (theme.vars || theme).shadows[1],
-  padding: '8px 12px',
+  padding: "8px 12px",
 }));
 
 export default function AppAppBar() {
@@ -43,41 +44,72 @@ export default function AppAppBar() {
       enableColorOnDark
       sx={{
         boxShadow: 0,
-        bgcolor: 'transparent',
-        backgroundImage: 'none',
-        mt: 'calc(var(--template-frame-height, 0px) + 28px)',
+        bgcolor: "transparent",
+        backgroundImage: "none",
+        mt: "calc(var(--template-frame-height, 0px) + 28px)",
       }}
     >
       <Container maxWidth="lg">
         <StyledToolbar variant="dense" disableGutters>
-          <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', px: 0 }}>
-            <Sitemark />
-            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-              <Button variant="text" color="info" size="small">
-                Features
+          <Box
+            sx={{ flexGrow: 1, display: "flex", alignItems: "center", px: 0 }}
+          >
+            <Link to="/">
+              <Sitemark />
+            </Link>
+            <Box sx={{ display: { xs: "none", md: "flex" } }}>
+              <Button
+                component={Link}
+                to="/"
+                variant="text"
+                sx={{ color: "#0056B8", fontSize: "18px" }}
+                size="small"
+              >
+                Trang chủ
               </Button>
-              <Button variant="text" color="info" size="small">
-                Testimonials
+              <Button
+                component={Link}
+                to="/about"
+                variant="text"
+                sx={{ color: "#0056B8", fontSize: "18px" }}
+                size="small"
+              >
+                Giới thiệu
               </Button>
-              <Button variant="text" color="info" size="small">
-                Highlights
+              <Button
+                component={Link}
+                to="/products"
+                variant="text"
+                sx={{ color: "#0056B8", fontSize: "18px" }}
+                size="small"
+              >
+                Sản phẩm
               </Button>
-              <Button variant="text" color="info" size="small">
-                Pricing
+              <Button
+                component={Link}
+                to="/distribution"
+                variant="text"
+                sx={{ color: "#0056B8", fontSize: "18px" }}
+                size="small"
+              >
+                Phân phối
               </Button>
-              <Button variant="text" color="info" size="small" sx={{ minWidth: 0 }}>
-                FAQ
-              </Button>
-              <Button variant="text" color="info" size="small" sx={{ minWidth: 0 }}>
-                Blog
+              <Button
+                component={Link}
+                to="/news"
+                variant="text"
+                sx={{ color: "#0056B8", fontSize: "18px", minWidth: 0 }}
+                size="small"
+              >
+                Tin tức
               </Button>
             </Box>
           </Box>
           <Box
             sx={{
-              display: { xs: 'none', md: 'flex' },
+              display: { xs: "none", md: "flex" },
               gap: 1,
-              alignItems: 'center',
+              alignItems: "center",
             }}
           >
             <Button color="primary" variant="text" size="small">
@@ -88,7 +120,7 @@ export default function AppAppBar() {
             </Button>
             <ColorModeIconDropdown />
           </Box>
-          <Box sx={{ display: { xs: 'flex', md: 'none' }, gap: 1 }}>
+          <Box sx={{ display: { xs: "flex", md: "none" }, gap: 1 }}>
             <ColorModeIconDropdown size="medium" />
             <IconButton aria-label="Menu button" onClick={toggleDrawer(true)}>
               <MenuIcon />
@@ -99,27 +131,56 @@ export default function AppAppBar() {
               onClose={toggleDrawer(false)}
               PaperProps={{
                 sx: {
-                  top: 'var(--template-frame-height, 0px)',
+                  top: "var(--template-frame-height, 0px)",
                 },
               }}
             >
-              <Box sx={{ p: 2, backgroundColor: 'background.default' }}>
+              <Box sx={{ p: 2, backgroundColor: "background.default" }}>
                 <Box
                   sx={{
-                    display: 'flex',
-                    justifyContent: 'flex-end',
+                    display: "flex",
+                    justifyContent: "flex-end",
                   }}
                 >
                   <IconButton onClick={toggleDrawer(false)}>
                     <CloseRoundedIcon />
                   </IconButton>
                 </Box>
-                <MenuItem>Features</MenuItem>
-                <MenuItem>Testimonials</MenuItem>
-                <MenuItem>Highlights</MenuItem>
-                <MenuItem>Pricing</MenuItem>
-                <MenuItem>FAQ</MenuItem>
-                <MenuItem>Blog</MenuItem>
+                <MenuItem component={Link} to="/" onClick={toggleDrawer(false)} color="#0056B8">
+                  Trang chủ
+                </MenuItem>
+                <MenuItem
+                  component={Link}
+                  to="/about"
+                  onClick={toggleDrawer(false)}
+                  color="#0056B8"
+                >
+                  Giới thiệu
+                </MenuItem> 
+                <MenuItem
+                  component={Link}
+                  to="/products"
+                  onClick={toggleDrawer(false)}
+                  color="#0056B8"
+                >
+                  Sản phẩm
+                </MenuItem>
+                <MenuItem
+                  component={Link}
+                  to="/distribution"
+                  onClick={toggleDrawer(false)}
+                  color="#0056B8"
+                >
+                  Phân phối
+                </MenuItem>
+                <MenuItem
+                  component={Link}
+                  to="/news"
+                  onClick={toggleDrawer(false)}
+                  color="#0056B8"
+                >
+                  Tin tức
+                </MenuItem>
                 <Divider sx={{ my: 3 }} />
                 <MenuItem>
                   <Button color="primary" variant="contained" fullWidth>

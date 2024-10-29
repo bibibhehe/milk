@@ -16,6 +16,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import { styled } from '@mui/material/styles';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import RssFeedRoundedIcon from '@mui/icons-material/RssFeedRounded';
+import { Icon } from '@iconify/react';
 
 const cardData = [
   {
@@ -196,6 +197,10 @@ export default function MainContent() {
           Blog
         </Typography>
         <Typography>Stay in the loop with the latest about our products</Typography>
+      </div>
+      <div>
+      <Icon icon="hugeicons:yogurt"  width="60" height="60" color="#007cba" />
+      Sữa chua ăn
       </div>
       <Box
         sx={{
