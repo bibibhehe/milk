@@ -198,10 +198,6 @@ export default function MainContent() {
         </Typography>
         <Typography>Stay in the loop with the latest about our products</Typography>
       </div>
-      <div>
-      <Icon icon="hugeicons:yogurt"  width="60" height="60" color="#007cba" />
-      Sữa chua ăn
-      </div>
       <Box
         sx={{
           display: { xs: 'flex', sm: 'none' },

@@ -8,6 +8,7 @@ import AppTheme from "../shared-theme/AppTheme";
 import Home from "./pages/home";
 import About from "./pages/about";
 import Products from "./pages/Products";
+import Distribution from "./pages/Distribution";
 
 export default function Blog(props) {
   return (
@@ -26,6 +27,7 @@ export default function Blog(props) {
             <Route path="/about" element={<About />} />
             <Route path="/products" element={<Products />} />
             <Route path="/products/:name" element={<Products />}/>
+            <Route path="/distribution" element={<Distribution />} />
           </Routes>
         </Container>
       </BrowserRouter>
