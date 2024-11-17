@@ -9,7 +9,7 @@ import Home from "./pages/home";
 import About from "./pages/about";
 import Products from "./pages/Products";
 import Distribution from "./pages/Distribution";
-
+import RecipeDetail from "./components/RecipeDetail";
 export default function Blog(props) {
   return (
     <AppTheme {...props}>
@@ -25,9 +25,10 @@ export default function Blog(props) {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/products" element={<Products />} />
+            <Route path="/products" element={<Products />}/>
             <Route path="/products/:name" element={<Products />}/>
-            <Route path="/distribution" element={<Distribution />} />
+            <Route path="/distribution" element={<Distribution />}/>
+            <Route path="/recipe/:id" element={<RecipeDetail />} />
           </Routes>
         </Container>
       </BrowserRouter>

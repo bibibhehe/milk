@@ -1,5 +1,6 @@
 // News.js
 import React from "react";
+import { useInView } from "react-intersection-observer";
 import {
   Box,
   Grid,
@@ -48,6 +49,10 @@ const articles = [
 ];
 
 const News = () => {
+  const { ref, inView } = useInView({
+    triggerOnce: true, // Trigger only once when the component is in view
+    threshold: 0.3, // Trigger when 50% of the component is in view
+  });
   return (
     <Box sx={{ padding: 2 }}>
       <Typography
@@ -67,13 +72,16 @@ const News = () => {
       <Grid container spacing={2}>
         {articles.map((article, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
-            
             <Card
+              ref={index === 0 ? ref : null}
               sx={{
                 height: "100%",
                 display: "flex",
                 flexDirection: "column",
                 padding: 0,
+                opacity: inView ? 1 : 0,
+                transform: inView ? "translateY(0)" : "translateY(100px)",
+                transition: "opacity 1s, transform 1s", // Add transition for the slide-in effect
                 "&:hover": {
                   "& .MuiTypography-root": {
                     color: "green", // Màu chữ xanh lá cây khi hover toàn bộ thẻ Card
@@ -81,21 +89,29 @@ const News = () => {
                 },
               }}
             >
-               <CardActionArea sx={{ flex: 1 }}>
-              <CardMedia
-                component="img"
-                height="370"
-                image={article.image}
-                alt={article.title}
-              />
-              <CardContent sx={{ backgroundColor: "white", padding: 1, height:"124px" }}>
-                <Typography variant="body2" color="text.secondary">
-                  {article.description}
-                </Typography>
-                <Typography gutterBottom variant="h5" component="div">
-                  {article.title}
-                </Typography>
-              </CardContent>
+              <CardActionArea sx={{ flex: 1 }}>
+                <CardMedia
+                  component="img"
+                  height="370"
+                  image={article.image}
+                  alt={article.title}
+                />
+                <CardContent
+                  sx={{ backgroundColor: "white", padding: 1, height: "124px" }}
+                >
+                  <Typography variant="body2" color="text.secondary">
+                    {article.description}
+                  </Typography>
+                  <Typography
+                    gutterBottom
+                    component="div"
+                    variant="body2"
+                    color="#0056B8"
+                    fontSize="22px"
+                  >
+                    {article.title}
+                  </Typography>
+                </CardContent>
               </CardActionArea>
             </Card>
           </Grid>

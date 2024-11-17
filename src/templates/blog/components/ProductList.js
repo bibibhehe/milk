@@ -14,7 +14,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           "&:hover": {
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.6)",
           },
         },
       },
@@ -22,45 +22,67 @@ const theme = createTheme({
   },
 });
 
-function ProductList({products}) {
+function ProductList({ productsData, productTitles, groupedProducts }) {
   return (
-    <ThemeProvider theme={theme}>
-      <h1>ProductList</h1>
-      <Grid container spacing={2}   sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        {products.map((product) => (
-          <Grid item xs={12} sm={6} md={4} key={product.id}  sx={{ display: 'flex', justifyContent: 'center' }}>
-            <Card sx={{ maxWidth: 345 }}>
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  height="240"
-                  image={product.img}
-                  alt={product.label}
-                />
-                <CardContent sx={{ backgroundColor: "white" }}>
-                  <Typography gutterBottom variant="h5" component="div">
-                    {product.label}
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                    {product.capacity}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+    <ThemeProvider theme={theme}> 
+      {Object.keys(productsData).map((productLine) => (
+        <div key={productLine}>
+           {groupedProducts &&  <Typography
+        variant="h4"
+        component="h1"
+        gutterBottom
+        sx={{
+          fontFamily: "'SFUFutura', sans-serif",
+          position: "relative",
+          fontWeight: "bold",
+          fontSize: "38px",
+          color: "#0056B8",
+        }}
+      >
+        {productTitles[productLine]}
+      </Typography>}
+          <Grid container spacing={2} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            {productsData[productLine].map((product) => (
+              <Grid item xs={12} sm={6} md={4} key={product.id} sx={{ display: 'flex', justifyContent: 'center' }}>
+                <Card sx={{ maxWidth: 345 }}>
+                  <CardActionArea>
+                    <CardMedia
+                      component="img"
+                      height="240"
+                      image={product.img}
+                      alt={product.label}
+                    />
+                    <CardContent sx={{ backgroundColor: "white" }}>
+                      <Typography gutterBottom variant="h5" component="div">
+                        {product.label}
+                      </Typography>
+                      <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                        {product.capacity}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </Grid>
+            ))}
           </Grid>
-        ))}
-      </Grid>
+        </div>
+      ))}
     </ThemeProvider>
   );
 }
 
 ProductList.propTypes = {
-  products: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      img: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
-    })
+  productsData: PropTypes.objectOf(
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        img: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired,
+        capacity: PropTypes.string.isRequired,
+      })
+    )
   ).isRequired,
+  groupedProducts: PropTypes.bool,
 };
+
 export default ProductList;

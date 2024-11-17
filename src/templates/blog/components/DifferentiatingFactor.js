@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import DalatMilkImage from "../assets/dalatmilk.png"; // Replace with the actual path to your image
 import checkIcon from "../assets/drop.png";
+import { useInView } from "react-intersection-observer";
 
 const DifferentiatingFactor = () => {
   const features1 = [
@@ -23,7 +24,10 @@ const DifferentiatingFactor = () => {
     "Không chất bảo quản",
     "Dịch vụ cung ứng tối ưu - 24h sản phẩm từ nhà máy đến người tiêu dùng",
   ];
-
+  const { ref, inView } = useInView({
+    triggerOnce: true, // Trigger only once when the component is in view
+    threshold: 0.01, // Trigger when 50% of the component is in view
+  });
   return (
     <Container maxWidth={false} style={{ marginTop: "2rem" }}>
       <Typography
@@ -40,7 +44,15 @@ const DifferentiatingFactor = () => {
         <Grid item xs={12} md={4}>
           <List>
             {features1.map((feature, index) => (
-              <ListItem key={index}>
+              <ListItem
+                key={index}
+                ref={index === 0 ? ref : null}
+                sx={{
+                  opacity: inView ? 1 : 0,
+                  transform: inView ? "translateY(0)" : "translateY(-200px)",
+                  transition: "opacity 2s, transform 2s",
+                }}
+              >
                 <ListItemIcon>
                   <img
                     src={checkIcon} // Đường dẫn ảnh
@@ -54,7 +66,12 @@ const DifferentiatingFactor = () => {
           </List>
         </Grid>
         <Grid item xs={12} md={4}>
-          <Card>
+          <Card ref={ref}
+              sx={{
+                opacity: inView ? 1 : 0,
+                transform: inView ? "translateY(0)" : "translateY(200px)",
+                transition: "opacity 2s, transform 2s",
+              }}>
             <CardMedia
               component="img"
               alt="Dalat Milk"
@@ -67,9 +84,17 @@ const DifferentiatingFactor = () => {
         <Grid item xs={12} md={4}>
           <List>
             {features2.map((feature, index) => (
-              <ListItem key={index}>
+              <ListItem
+                key={index}
+                ref={index === 0 ? ref : null}
+                sx={{
+                  opacity: inView ? 1 : 0,
+                  transform: inView ? "translateY(0)" : "translateY(-200px)",
+                  transition: "opacity 2s, transform 2s",
+                }}
+              >
                 <ListItemIcon>
-                <img
+                  <img
                     src={checkIcon} // Đường dẫn ảnh
                     alt="Icon"
                     style={{ width: "24px", height: "24px" }} // Điều chỉnh kích thước ảnh

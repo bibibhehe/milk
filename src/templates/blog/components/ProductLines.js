@@ -37,7 +37,7 @@ const ProductLines = ({ onProductLineClick }) => {
   ];
 
   const formatProductName = (name) => {
-    return name.toLowerCase().replace(/\s+/g, "-"); // Chuyển thành chữ thường và thay khoảng trắng bằng dấu gạch nối
+    return name.replace(/\s+/g, "-"); // Chuyển thành chữ thường và thay khoảng trắng bằng dấu gạch nối
   };
 
   return (
